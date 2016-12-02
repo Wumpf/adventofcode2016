@@ -8,26 +8,20 @@
 # file input
 data = open('input.txt').read()
 
-orientation = 0
-pos = [0,0]
+dir = (0, 1)
+pos = [0, 0]
 
 for instr in data.split(','):
     instr = instr.strip()
-    orientation += 1 if instr[0] == 'R' else -1
-
-    if orientation == 3:
-        orientation = -1
-    elif orientation == -3:
-        orientation = 1
+    if instr[0] == 'R':
+        dir = (dir[1], -dir[0]) 
+    else:
+        dir = (-dir[1], dir[0])
 
     walkDist = int(instr[1:])
 
-    if abs(orientation) == 1: # Moving left/right
-        pos[0] += walkDist * orientation
-    elif orientation == 0: # Moving up
-        pos[1] += walkDist
-    else: # Moving down (two possible values for orientation)
-        pos[1] -= walkDist
+    pos[0] += dir[0] * walkDist
+    pos[1] += dir[1] * walkDist
 
 print('pos:', pos)
 print('dist:', abs(pos[0]) + abs(pos[1]))
