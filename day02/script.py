@@ -8,12 +8,28 @@
 # file input
 data = open('input.txt').read()
 
-keypad = (('1', '2', '3'), ('4', '5', '6'), ('7', '8', '9'))
-pos = [1, 1] # y, x
+partTwo = True
+
+keypad = ()
+pos = []
+if partTwo:
+    keypad = (('x', 'x', '1', 'x', 'x'),
+              ('x', '2', '3', '4', 'x'),
+              ('5', '6', '7', '8', '9'),
+              ('x', 'A', 'B', 'C', 'x'),
+              ('x', 'x', 'D', 'x', 'x'))
+    pos = [3, 0] # y, x
+else:
+    keypad = (('1', '2', '3'),
+              ('4', '5', '6'),
+              ('7', '8', '9'))
+    pos = [1, 1] # y, x
+
 solution = ''
 
 for instr in data.splitlines():
     for d in instr:
+        posBefore = pos.copy()
         # parse
         if d is 'R': # right
             pos[1] += 1
@@ -25,9 +41,11 @@ for instr in data.splitlines():
             pos[0] += 1
         else:
             raise RuntimeError('Unknown direction letter! ' + d)
-        # clamp
-        pos[0] = max(min(pos[0], 2), 0)
-        pos[1] = max(min(pos[1], 2), 0)
+        # invalid moves
+        if pos[0] < 0 or pos[0] >= len(keypad) or \
+           pos[1] < 0 or pos[1] >= len(keypad[0]) or \
+           keypad[pos[0]][pos[1]] == 'x':
+            pos = posBefore
     # write to output
     print(pos)
     solution += keypad[pos[0]][pos[1]]
