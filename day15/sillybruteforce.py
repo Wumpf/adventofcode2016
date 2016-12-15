@@ -7,8 +7,8 @@ import numpy as np
 # pylint: disable=C0301
 
 # Example
-#start_positions = np.array([4, 1], dtype=np.int)
-#num_positions = np.array([5, 2], dtype=np.int)
+start_positions = np.array([4, 1], dtype=np.int)
+num_positions = np.array([5, 2], dtype=np.int)
 
 # Puzzle input
 # Disc #1 has 13 positions; at time=0, it is at position 10.
@@ -21,8 +21,8 @@ import numpy as np
 #start_positions = np.array([10, 15, 17, 1, 0, 1], dtype=np.int)
 #num_positions = np.array([13, 17, 19, 7, 5, 3], dtype=np.int)
 # Part 2
-start_positions = np.array([10, 15, 17, 1, 0, 1, 0], dtype=np.int)
-num_positions = np.array([13, 17, 19, 7, 5, 3, 11], dtype=np.int)
+#start_positions = np.array([10, 15, 17, 1, 0, 1, 0], dtype=np.int)
+#num_positions = np.array([13, 17, 19, 7, 5, 3, 11], dtype=np.int)
 
 
 num_disks = len(start_positions)
