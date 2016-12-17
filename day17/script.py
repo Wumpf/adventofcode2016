@@ -43,6 +43,7 @@ def find(code):
                     return (bytestring + b'R')[len(code):]
                 nextqueue.append(((bytestring + b'R'), newpos))
         queue, nextqueue = nextqueue, queue
+        nextqueue.clear()
 
 
 def longestpath(code):
@@ -81,6 +82,7 @@ def longestpath(code):
                 elif maxpathlen != currentlen:
                     maxpathlen = currentlen
         queue, nextqueue = nextqueue, queue
+        nextqueue.clear()
         currentlen += 1
         print(currentlen)
 
@@ -94,6 +96,6 @@ def longestpath(code):
 
 # Okay. This is just too slow and takes too much memory I'm running out of ideas here.
 # So.. let's just try to do the whole thing in C instead. 
-print(longestpath('ihgpwlah'.encode()))
+print(longestpath('qtetzkpl'.encode()))
 
 
