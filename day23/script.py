@@ -13,16 +13,17 @@
 # dec a
 # dec a'''
 # file input
-with open('input.txt', 'r') as f:
+with open('input_mul.txt', 'r') as f:
     data = f.read()
 
 
 def run(lines):
-    register = {'a':7, 'b':0, 'c':0, 'd':0}
+    register = {'a':12, 'b':0, 'c':0, 'd':0}
     i = 0
     while i < len(lines):
         current = lines[i]
         instr = current[0]
+
         if len(current) == 3:
             try:
                 arg1val = int(current[2])
@@ -31,12 +32,13 @@ def run(lines):
                 arg1val = register[current[2]]
                 arg1reg = current[2]
 
-        try:
-            arg0val = int(current[1])
-            arg0reg = None
-        except:
-            arg0val = register[current[1]]
-            arg0reg = current[1]
+        if len(current) > 1:
+            try:
+                arg0val = int(current[1])
+                arg0reg = None
+            except:
+                arg0val = register[current[1]]
+                arg0reg = current[1]
 
         try:
             if instr == 'cpy' and arg1reg is not None:
@@ -62,6 +64,10 @@ def run(lines):
                         targetline[0] = 'cpy'
                     else:
                         targetline[0] = 'jnz'
+            elif instr == 'nop':
+                pass
+            elif instr == 'mul':
+                register[arg0reg] = register[arg1reg] * register[current[3]]
 
             else:
                 raise ValueError("Unknown instruction", instr)
